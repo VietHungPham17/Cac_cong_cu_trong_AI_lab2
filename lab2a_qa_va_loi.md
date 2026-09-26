@@ -1,0 +1,33 @@
+# QA VÀ LỖI CỦA AI (LAB 2A)
+
+## 1. 8 Câu hỏi và câu trả lời về kiến trúc (Có kiểm chứng)
+
+| STT | Câu hỏi của tôi | Trả lời của AI | File tham chiếu | Dòng | Kiểm chứng (Tự mở tệp) |
+|---|---|---|---|---|---|
+| 1 | Kiến trúc tổng thể của dự án này như thế nào? | Hệ thống đi theo mô hình 3 lớp. Lớp giao diện (CLI) ở `main.py`, gọi xuống lớp nghiệp vụ (`student_db.py`, `faculty_db.py`, ...). Các lớp nghiệp vụ giao tiếp CSDL qua `database.py`. Data transfer object được định nghĩa trong `models.py`. | `main.py`, `database.py` | Toàn bộ | **✅ ĐÚNG.** Kiến trúc module phân chia rất rõ ràng. |
+| 2 | Chức năng validation được xử lý tập trung hay phân tán? | Xử lý tập trung ở module `validators.py`. Tại đây có lớp `Validator` chứa hàm cơ bản, và các lớp cụ thể như `StudentValidator`, `GradeValidator` để check logic từng phần. | `validators.py` | L14-250 | **✅ ĐÚNG.** Các module CRUD chỉ gọi hàm từ file này. |
+| 3 | Database được khởi tạo thế nào và có bao nhiêu bảng? | DB dùng Singleton qua `get_db()`. Có 7 bảng: faculties, majors, students, subjects, classrooms, enrollments, grades. | `database.py` | L76-200 | **❌ SAI.** Có tới 9 bảng, AI bỏ sót `attendance` và `audit_log`. |
+| 4 | Hệ thống tính điểm và GPA ra sao? | Môn học tính điểm dựa vào 3 trọng số: midterm (0.3), final (0.5), assignment (0.2). Điểm được ánh xạ sang điểm chữ và hệ 4.0. | `models.py` | L130-160 | **✅ ĐÚNG.** Các trọng số hardcode trong hàm `calculate_total`. |
+| 5 | Các tính năng xuất báo cáo nằm ở đâu và xuất ra format gì? | Xử lý trong `report.py` bởi class `ReportGenerator`. Hỗ trợ xuất ra CSV, JSON và định dạng văn bản TXT. | `report.py`, `config.py` | L27 | **✅ ĐÚNG.** Có xử lý switch/case để ghi ra đúng format. |
+| 6 | Khi xóa một sinh viên thì dữ liệu có bị mất vĩnh viễn không? | Không, hệ thống dùng cơ chế Soft Delete. Cột `status` trong bảng `students` sẽ chuyển thành `inactive`. Có thể undo bằng hàm `restore_student()`. | `student_db.py` | L150-165 | **⚠️ BÁN ĐÚNG.** Soft delete là thật, nhưng KHÔNG có hàm `restore_student()` nào trong mã. AI đã "bịa" ra hàm này. |
+| 7 | Việc kiểm tra quyền truy cập (Authentication) xử lý ở đâu? | Xử lý ở module `auth.py`, dùng JWT token và kiểm tra `SESSION_TIMEOUT` từ `config.py`. | Không có | Không có | **❌ SAI HOÀN TOÀN.** Không hề có file `auth.py` và chức năng đăng nhập trong repo. AI bị ảo giác từ hằng số trong config. |
+| 8 | Hệ thống có cơ chế log vết hành động không? | Có, các hàm update/delete trong `*_db.py` gọi hàm private `_log_action()` để insert vào bảng `audit_log`. | `student_db.py`, `database.py` | L360-375 | **✅ ĐÚNG.** Audit log được xử lý riêng rẽ trong từng module CRUD. |
+
+## 2. Danh sách 3 lỗi của AI và nguyên nhân
+
+1. **Lỗi đếm thiếu bảng trong CSDL:**
+   - *Biểu hiện:* AI báo DB có 7 bảng, nhưng thực tế có 9 bảng.
+   - *Nguyên nhân kỹ thuật:* AI thường xác định bảng dựa trên việc xem xét có bao nhiêu module CRUD (`student_db`, `faculty_db`...). Bảng `attendance` và `audit_log` không có module CRUD riêng biệt (attendance được gộp trong `classroom_db`) nên AI bỏ qua nếu không đọc kỹ từng chuỗi SQL `CREATE TABLE`.
+2. **Ảo giác (Hallucination) tính năng Undo Soft-delete:**
+   - *Biểu hiện:* AI tự tin khẳng định có hàm `restore_student()`.
+   - *Nguyên nhân kỹ thuật:* Trong dữ liệu huấn luyện của LLM, hầu hết các hệ thống có thiết kế Soft Delete đều đi kèm hàm Restore. Khi không được cấp ngữ cảnh cực kỳ chặt chẽ, mô hình tự điền vào chỗ trống bằng "tri thức chung" thay vì đọc đúng code.
+3. **Ảo giác tính năng Đăng nhập (Auth):**
+   - *Biểu hiện:* Bịa ra module `auth.py` vì thấy hằng số `SESSION_TIMEOUT` trong config.
+   - *Nguyên nhân kỹ thuật:* Suy luận quá đà. AI nhìn thấy các biến liên quan đến timeout thì map ngay với tính năng login phổ biến, dù repo này chỉ là CLI thuần túy không yêu cầu xác thực.
+
+## 3. Đối chiếu và phát hiện các điểm lỗi thời của file README.md
+
+Sau khi lập bản đồ qua AI và kiểm chứng lại bằng code thật, phát hiện file `README.md` của dự án đã bị **lỗi thời/thiếu sót** ở các điểm sau:
+- **Phần cấu trúc thư mục:** README không đề cập đến module `validators.py` và `utils.py` dù đây là 2 module rất lớn và quan trọng.
+- **Phần tính năng:** README chỉ ghi "Xuất báo cáo CSV", trong khi hệ thống hiện tại đã hỗ trợ thêm xuất JSON và TXT.
+- **Tính năng mới:** Tính năng "Điểm danh" (Attendance) và "Audit Log" đã được code nhưng chưa được update lên README.
