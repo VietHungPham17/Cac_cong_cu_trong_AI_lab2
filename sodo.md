@@ -10,7 +10,7 @@ graph TD
     A --> F["classroom_db.py (Classroom, Enrollment, Attendance)"]
     A --> G["report.py (CSV/JSON/TXT Export)"]
     
-    B --> H["database.py (SQLite Connection & Schema)"]
+    B --> H["database.py (SQLite Connection and Schema)"]
     C --> H
     D --> H
     E --> H
