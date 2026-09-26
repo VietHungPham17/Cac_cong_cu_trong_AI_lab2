@@ -170,6 +170,54 @@ class ReportGenerator:
                 f"grade_report_{timestamp}.txt", content
             )
 
+    def grade_report_by_semester(self, student_id: int, semester: str, 
+                                 academic_year: str, format="csv") -> str:
+        """Xuất báo cáo bảng điểm theo học kỳ."""
+        sql = """
+            SELECT s.student_id as sid, s.first_name, s.last_name,
+                   sub.code as subject_code, sub.name as subject_name,
+                   sub.credits, g.midterm_score, g.final_score,
+                   g.assignment_score, g.total_score, g.letter_grade,
+                   g.gpa_value, g.semester, g.academic_year
+            FROM grades g
+            JOIN students s ON g.student_id = s.id
+            JOIN subjects sub ON g.subject_id = sub.id
+            WHERE g.student_id = ? AND g.semester = ? AND g.academic_year = ?
+            ORDER BY sub.code
+        """
+        rows = self.db.fetchall_as_dict(sql, (student_id, semester, academic_year))
+        if not rows:
+            raise ValueError("Không có điểm trong học kỳ này")
+            
+        timestamp = self._get_timestamp()
+
+        if format == "csv":
+            headers = [
+                "Mã SV", "Tên", "Họ", "Mã MH", "Tên MH", "Tín chỉ",
+                "Giữa kỳ", "Cuối kỳ", "Bài tập", "Tổng kết",
+                "Điểm chữ", "GPA", "Học kỳ", "Năm học"
+            ]
+            csv_rows = [
+                [r["sid"], r["first_name"], r["last_name"],
+                 r["subject_code"], r["subject_name"], r["credits"],
+                 r["midterm_score"], r["final_score"], r["assignment_score"],
+                 r["total_score"], r["letter_grade"], r["gpa_value"],
+                 r["semester"], r["academic_year"]]
+                for r in rows
+            ]
+            return self._write_csv(
+                f"semester_report_{timestamp}.csv", headers, csv_rows
+            )
+        elif format == "json":
+            return self._write_json(
+                f"semester_report_{timestamp}.json", rows
+            )
+        else:
+            content = self._format_grade_txt(rows)
+            return self._write_txt(
+                f"semester_report_{timestamp}.txt", content
+            )
+
     def faculty_summary_report(self, format="csv") -> str:
         """Xuất báo cáo tổng hợp theo khoa."""
         rows = self.db.fetchall_as_dict("""
