@@ -3,31 +3,31 @@
 
 ```mermaid
 graph TD
-    A["main.py<br/>(CLI Interface)"] --> B["student_db.py<br/>(Student CRUD)"]
-    A --> C["faculty_db.py<br/>(Faculty CRUD)"]
-    A --> D["subject_db.py<br/>(Subject CRUD)"]
-    A --> E["grade_db.py<br/>(Grade CRUD)"]
-    A --> F["classroom_db.py<br/>(Classroom + Enrollment + Attendance)"]
-    A --> G["report.py<br/>(CSV/JSON/TXT Export)"]
+    A["main.py (CLI Interface)"] --> B["student_db.py (Student CRUD)"]
+    A --> C["faculty_db.py (Faculty CRUD)"]
+    A --> D["subject_db.py (Subject CRUD)"]
+    A --> E["grade_db.py (Grade CRUD)"]
+    A --> F["classroom_db.py (Classroom, Enrollment, Attendance)"]
+    A --> G["report.py (CSV/JSON/TXT Export)"]
     
-    B --> H["database.py<br/>(SQLite Connection + Schema)"]
+    B --> H["database.py (SQLite Connection & Schema)"]
     C --> H
     D --> H
     E --> H
     F --> H
     G --> H
     
-    B --> I["validators.py<br/>(Input Validation)"]
+    B --> I["validators.py (Input Validation)"]
     C --> I
     D --> I
     E --> I
     
-    B --> J["models.py<br/>(Dataclass Definitions)"]
+    B --> J["models.py (Dataclass Definitions)"]
     E --> J
     F --> J
     
-    A --> K["utils.py<br/>(Formatting, Helpers)"]
-    A --> L["config.py<br/>(Constants, Settings)"]
+    A --> K["utils.py (Formatting, Helpers)"]
+    A --> L["config.py (Constants, Settings)"]
     
     H --> L
     I --> L
