@@ -3,7 +3,7 @@
 ## 1. Bảng 20 dòng dữ liệu thô
 
 | STT | Tác vụ thực hiện trên repository | Phân loại | Bấm chấp nhận (Y/N) | Giữ lại sau 24h (Y/N) | TG hoàn thành (phút) | TG tự làm ước tính (phút) |
-|-----|-----------------------------------|-----------|---------------------|-----------------------|----------------------|---------------------------|
+| --- | --- | --- | --- | --- | --- | --- |
 | 1 | Viết hàm `create()` trong student_db.py | Viết mới | Y | Y | 3 | 12 |
 | 2 | Viết hàm `get_paginated()` với bộ lọc | Viết mới | Y | Y | 5 | 18 |
 | 3 | Viết hàm `calculate_total()` trong Grade | Viết mới | Y | N (phải sửa logic) | 2 | 8 |

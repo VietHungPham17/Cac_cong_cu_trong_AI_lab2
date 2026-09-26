@@ -11,7 +11,7 @@ Thực hiện trên 3 nhánh Git độc lập:
 ## 2. Bảng đo đạc (3 chế độ × 4 đại lượng)
 
 | Chế độ thao tác | TG hoàn thành tới lúc test báo XANH | Số dòng bị thay đổi (Diff) | Số dòng phải tự sửa lại bằng tay | Kết quả Test |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **Lần 1: Autocomplete (Gợi ý tự động lúc gõ)** | 18 phút | 12 dòng | 3 dòng | ✅ Xanh |
 | **Lần 2: Inline Edit (Bôi đen vùng chọn)** | 10 phút | 15 dòng | 2 dòng | ✅ Xanh |
 | **Lần 3: Composer (Đa tệp)** | 7 phút | 28 dòng | 6 dòng | ✅ Xanh |

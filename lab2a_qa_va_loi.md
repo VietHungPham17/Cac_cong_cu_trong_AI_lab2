@@ -3,7 +3,7 @@
 ## 1. 8 Câu hỏi và câu trả lời về kiến trúc (Có kiểm chứng)
 
 | STT | Câu hỏi của tôi | Trả lời của AI | File tham chiếu | Dòng | Kiểm chứng (Tự mở tệp) |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | 1 | Kiến trúc tổng thể của dự án này như thế nào? | Hệ thống đi theo mô hình 3 lớp. Lớp giao diện (CLI) ở `main.py`, gọi xuống lớp nghiệp vụ (`student_db.py`, `faculty_db.py`, ...). Các lớp nghiệp vụ giao tiếp CSDL qua `database.py`. Data transfer object được định nghĩa trong `models.py`. | `main.py`, `database.py` | Toàn bộ | **✅ ĐÚNG.** Kiến trúc module phân chia rất rõ ràng. |
 | 2 | Chức năng validation được xử lý tập trung hay phân tán? | Xử lý tập trung ở module `validators.py`. Tại đây có lớp `Validator` chứa hàm cơ bản, và các lớp cụ thể như `StudentValidator`, `GradeValidator` để check logic từng phần. | `validators.py` | L14-250 | **✅ ĐÚNG.** Các module CRUD chỉ gọi hàm từ file này. |
 | 3 | Database được khởi tạo thế nào và có bao nhiêu bảng? | DB dùng Singleton qua `get_db()`. Có 7 bảng: faculties, majors, students, subjects, classrooms, enrollments, grades. | `database.py` | L76-200 | **❌ SAI.** Có tới 9 bảng, AI bỏ sót `attendance` và `audit_log`. |

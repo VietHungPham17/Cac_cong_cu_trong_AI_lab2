@@ -3,7 +3,7 @@
 ## 1. Đặc tả 7 thành phần của tính năng (Đã khóa)
 
 | Thuộc tính | Chi tiết Đặc tả |
-|---|---|
+| --- | --- |
 | **1. Tên tính năng** | Export Grade Report theo Học kỳ (Semester) cho một sinh viên cụ thể. |
 | **2. Bối cảnh** | Hiện tại hệ thống xuất toàn bộ bảng điểm, nhưng user cần tính năng chỉ xuất điểm của 1 học kỳ cụ thể để gửi bảng điểm cuối kỳ. |
 | **3. Input** | `student_id` (str), `semester` (str), `academic_year` (str), `format` (str mặc định là 'csv') |
