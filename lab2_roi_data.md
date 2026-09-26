@@ -2,29 +2,28 @@
 
 ## 1. Bảng 20 dòng dữ liệu thô
 
-| STT | Tác vụ thực hiện trên repository | Phân loại | Bấm chấp nhận (Y/N) | Giữ lại sau 24h (Y/N) | TG hoàn thành (phút) | TG tự làm ước tính (phút) |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | Viết hàm `create()` trong student_db.py | Viết mới | Y | Y | 3 | 12 |
-| 2 | Viết hàm `get_paginated()` với bộ lọc | Viết mới | Y | Y | 5 | 18 |
-| 3 | Viết hàm `calculate_total()` trong Grade | Viết mới | Y | N (phải sửa logic) | 2 | 8 |
-| 4 | Viết hàm `validate_student_id()` regex | Viết mới | Y | Y | 1 | 5 |
-| 5 | Viết hàm `bulk_import()` | Viết mới | Y | Y | 4 | 15 |
-| 6 | Viết hàm `enroll_student()` kiểm tra sĩ số | Viết mới | Y | N (thiếu check trùng) | 3 | 10 |
-| 7 | Viết hàm `get_transcript()` JOIN query | Viết mới | Y | Y | 2 | 8 |
-| 8 | Viết hàm `student_list_report()` CSV export | Viết mới | Y | Y | 3 | 12 |
-| 9 | Sửa lỗi foreign key trong `initialize_tables()` | Sửa lỗi | Y | Y | 1 | 3 |
-| 10 | Thêm index cho bảng grades | Cải tiến | Y | Y | 1 | 2 |
-| 11 | Viết test `test_create_student_success` | Test | Y | Y | 1 | 4 |
-| 12 | Viết test `test_pagination` 25 records | Test | Y | N (sửa lại assert) | 2 | 6 |
-| 13 | Hoàn tất docstring cho models.py | Tài liệu | Y | Y | 1 | 5 |
-| 14 | Gợi ý `format_table()` trong utils.py | Tiện ích | N (sai format) | — | 2 | 4 |
-| 15 | Auto-complete các lựa chọn menu CLI | UI | Y | Y | 1 | 3 |
-| 16 | Viết `_log_action()` ghi audit trail | Cải tiến | Y | Y | 2 | 7 |
-| 17 | Gợi ý SQL query thống kê GPA phân bố | Query | Y | Y | 1 | 5 |
-| 18 | Sửa lỗi `validate_unique` với exclude_id | Sửa lỗi | N (gợi ý sai logic) | — | 3 | 4 |
-| 19 | Thêm context manager `transaction()` | Cải tiến | Y | Y | 1 | 6 |
-| 20 | Auto-complete hàm `_seed_sample_data()` | Viết mới | Y | N (cần sửa data mẫu) | 2 | 8 |
-
+| STT | Tác vụ thực hiện trên repository                | Phân loại | Bấm chấp nhận (Y/N) | Giữ lại sau 24h (Y/N) | TG hoàn thành (phút) | TG tự làm ước tính (phút) |
+| --- | ----------------------------------------------- | --------- | ------------------- | --------------------- | -------------------- | ------------------------- |
+| 1   | Viết hàm `create()` trong student_db.py         | Viết mới  | Y                   | Y                     | 3                    | 12                        |
+| 2   | Viết hàm `get_paginated()` với bộ lọc           | Viết mới  | Y                   | Y                     | 5                    | 18                        |
+| 3   | Viết hàm `calculate_total()` trong Grade        | Viết mới  | Y                   | N (phải sửa logic)    | 2                    | 8                         |
+| 4   | Viết hàm `validate_student_id()` regex          | Viết mới  | Y                   | Y                     | 1                    | 5                         |
+| 5   | Viết hàm `bulk_import()`                        | Viết mới  | Y                   | Y                     | 4                    | 15                        |
+| 6   | Viết hàm `enroll_student()` kiểm tra sĩ số      | Viết mới  | Y                   | N (thiếu check trùng) | 3                    | 10                        |
+| 7   | Viết hàm `get_transcript()` JOIN query          | Viết mới  | Y                   | Y                     | 2                    | 8                         |
+| 8   | Viết hàm `student_list_report()` CSV export     | Viết mới  | Y                   | Y                     | 3                    | 12                        |
+| 9   | Sửa lỗi foreign key trong `initialize_tables()` | Sửa lỗi   | Y                   | Y                     | 1                    | 3                         |
+| 10  | Thêm index cho bảng grades                      | Cải tiến  | Y                   | Y                     | 1                    | 2                         |
+| 11  | Viết test `test_create_student_success`         | Test      | Y                   | Y                     | 1                    | 4                         |
+| 12  | Viết test `test_pagination` 25 records          | Test      | Y                   | N (sửa lại assert)    | 2                    | 6                         |
+| 13  | Hoàn tất docstring cho models.py                | Tài liệu  | Y                   | Y                     | 1                    | 5                         |
+| 14  | Gợi ý `format_table()` trong utils.py           | Tiện ích  | N (sai format)      | —                     | 2                    | 4                         |
+| 15  | Auto-complete các lựa chọn menu CLI             | UI        | Y                   | Y                     | 1                    | 3                         |
+| 16  | Viết `_log_action()` ghi audit trail            | Cải tiến  | Y                   | Y                     | 2                    | 7                         |
+| 17  | Gợi ý SQL query thống kê GPA phân bố            | Query     | Y                   | Y                     | 1                    | 5                         |
+| 18  | Sửa lỗi `validate_unique` với exclude_id        | Sửa lỗi   | N (gợi ý sai logic) | —                     | 3                    | 4                         |
+| 19  | Thêm context manager `transaction()`            | Cải tiến  | Y                   | Y                     | 1                    | 6                         |
+| 20  | Auto-complete hàm `_seed_sample_data()`         | Viết mới  | Y                   | N (cần sửa data mẫu)  | 2                    | 8                         |
 ## 2. Các chỉ số đo lường (AR & RR)
 
 - **Tổng số gợi ý:** 20

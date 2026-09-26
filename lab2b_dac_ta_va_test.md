@@ -2,16 +2,15 @@
 
 ## 1. Đặc tả 7 thành phần của tính năng (Đã khóa)
 
-| Thuộc tính | Chi tiết Đặc tả |
-| --- | --- |
-| **1. Tên tính năng** | Export Grade Report theo Học kỳ (Semester) cho một sinh viên cụ thể. |
-| **2. Bối cảnh** | Hiện tại hệ thống xuất toàn bộ bảng điểm, nhưng user cần tính năng chỉ xuất điểm của 1 học kỳ cụ thể để gửi bảng điểm cuối kỳ. |
-| **3. Input** | `student_id` (str), `semester` (str), `academic_year` (str), `format` (str mặc định là 'csv') |
-| **4. Output** | Trả về chuỗi `filepath` chứa đường dẫn tới file CSV (trong thư mục `reports/`). |
-| **5. Module ảnh hưởng** | `report.py` (chứa logic xuất), `main.py` (cập nhật menu CLI). |
-| **6. Ràng buộc** | 1. SV phải tồn tại.<br>2. Nếu HK đó không có môn nào, văng exception `ValueError("Không có điểm trong học kỳ này")` thay vì tạo file rỗng. |
-| **7. Acceptance Criteria** | 1. Input đúng → Tạo file CSV với N môn + 1 dòng header.<br>2. Input sai/trống → Báo lỗi rõ ràng. |
-
+| Thuộc tính                 | Chi tiết Đặc tả                                                                                                                            |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1. Tên tính năng**       | Export Grade Report theo Học kỳ (Semester) cho một sinh viên cụ thể.                                                                       |
+| **2. Bối cảnh**            | Hiện tại hệ thống xuất toàn bộ bảng điểm, nhưng user cần tính năng chỉ xuất điểm của 1 học kỳ cụ thể để gửi bảng điểm cuối kỳ.             |
+| **3. Input**               | `student_id` (str), `semester` (str), `academic_year` (str), `format` (str mặc định là 'csv')                                              |
+| **4. Output**              | Trả về chuỗi `filepath` chứa đường dẫn tới file CSV (trong thư mục `reports/`).                                                            |
+| **5. Module ảnh hưởng**    | `report.py` (chứa logic xuất), `main.py` (cập nhật menu CLI).                                                                              |
+| **6. Ràng buộc**           | 1. SV phải tồn tại.<br>2. Nếu HK đó không có môn nào, văng exception `ValueError("Không có điểm trong học kỳ này")` thay vì tạo file rỗng. |
+| **7. Acceptance Criteria** | 1. Input đúng → Tạo file CSV với N môn + 1 dòng header.<br>2. Input sai/trống → Báo lỗi rõ ràng.                                           |
 ---
 
 ## 2. Bản ghi chạy Test (Test Đỏ trước, Test Xanh sau)
